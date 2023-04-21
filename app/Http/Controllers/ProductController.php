@@ -125,8 +125,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        Product::find($id)->image()->deleted();
-        Product::find($id)->tags()->deleted();
+        $product =  Product::find($id);
+        $product->images()->delete();
+        $product->tags()->delete();
         Product::deleted($id);
         return response()->json(['success' => 'success']);
 
